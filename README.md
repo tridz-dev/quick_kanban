@@ -4,4 +4,4 @@ An enhanced version of Kanban Board in frappe
 
 #### License
 
-mit
+mit# Quick-Kanban

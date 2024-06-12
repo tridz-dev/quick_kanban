@@ -2,7 +2,7 @@
 frappe.provide("frappe.views");
 
 let kanban_conf = frappe.call({
-    method: "kanban_new.get_beta _users.get_kanban_config",
+    method: "quick_kanban.get_beta _users.get_kanban_config",
     callback: function (r) {
         if (!r.exc && r.message) {
             console.log("Kanban Beta Enabled:", r.message.kanban_beta);
@@ -36,7 +36,7 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.KanbanView {
     renderBeta() {
         if (!window.refreshKanbanBoard) {
             const script = document.createElement('script');
-            script.src = '/assets/kanban_new/js/kanbannew.js';
+            script.src = '/assets/quick_kanban/js/quick_kanban.js';
             document.head.appendChild(script);
             this.$result.html(`<div id="kanbanapp">App</div>`);
         } else {

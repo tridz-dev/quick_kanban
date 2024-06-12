@@ -4,9 +4,6 @@ const store = createStore({
     state: {
         columns: [],
         config: [],
-        // ref_doctype: '',
-        // field_name: '',
-        // fields: [],
     },
     mutations: {
         SET_COLUMNS(state, columns) {
@@ -77,6 +74,7 @@ const store = createStore({
                         name: board_name,
                     },
                 });
+
                 const board = response.message;
                 const ref_doctype = board.reference_doctype;
                 const field_name = board.field_name;
@@ -94,6 +92,7 @@ const store = createStore({
                     fields = ['name', 'title'];
                 }
                 const meta = frappe.get_meta(ref_doctype);
+
                 commit('SET_KANBAN_CONFIG', { board_name, ref_doctype, field_name, title_field: meta.title_field, fields, highlighted_field, highlight_table });
 
                 const columnsData = board.columns.map(column => ({

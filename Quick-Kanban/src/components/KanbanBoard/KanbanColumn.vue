@@ -36,7 +36,7 @@
                 @keyup.enter="newDoc(column.title)"></textarea>
         </div>
 
-        <draggable v-model="column.cards" group="cards" @end="drop" item-key="name" :animation="250" :id="columnIndex"
+        <draggable v-model="column.cards" group="cards" @end="drop" item-key="name" :animation="100" :id="columnIndex"
             class="kanban-cards">
             <template #item="{ element }">
                 <KanbanCard :card="element" :config="config" :columnIndex="columnIndex" />

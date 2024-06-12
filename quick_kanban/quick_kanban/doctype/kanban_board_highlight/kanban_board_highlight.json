@@ -1,0 +1,42 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-11 11:12:14.156270",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tag",
+  "color"
+ ],
+ "fields": [
+  {
+   "fieldname": "tag",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tag",
+   "reqd": 1
+  },
+  {
+   "default": "gray",
+   "fieldname": "color",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Color",
+   "options": "gray\nblue\ngreen\nred\norange\namber\nyellow\ncyan\nteal\nviolet\npink\npurple",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-06-12 10:56:24.028551",
+ "modified_by": "Administrator",
+ "module": "Quick-Kanban",
+ "name": "Kanban Board Highlight",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

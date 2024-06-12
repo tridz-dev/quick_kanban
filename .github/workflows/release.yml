@@ -16,7 +16,7 @@ jobs:
           github.ref == 'refs/heads/develop' 
             && contains(github.event.head_commit.message, '--BUILD')
 # https://github.com/orgs/community/discussions/25641
-    name: Build and test
+    name: Build and test STG
     runs-on: ubuntu-latest
 # https://stackoverflow.com/questions/71361539/github-action-test-if-a-commit-containing-a-specific-word-was-previously-made
 # https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event
@@ -33,7 +33,7 @@ jobs:
     if: |
           github.ref == 'refs/heads/BRANCH2' 
             && contains(github.event.head_commit.message, '--BUILD')
-    name: Build and test STG
+    name: Build and test
     runs-on: ubuntu-latest
 # https://stackoverflow.com/questions/71361539/github-action-test-if-a-commit-containing-a-specific-word-was-previously-made
 # https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event

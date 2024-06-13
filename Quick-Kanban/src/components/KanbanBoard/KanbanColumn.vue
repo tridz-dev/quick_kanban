@@ -1,8 +1,7 @@
 <template>
-    <div class="kanban-column" :key="column.id"
-        :style="getColumnStyle(indicators.find(indicator => indicator.name === column.indicator).class)">
-        <div class="kanban-column-header d-flex justify-content-between">
-            <div class="d-flex">
+    <div class="kanban-column" :key="column.id" :style="getColumnStyle(column.indicator)">
+        <div class="kanban-column-header">
+            <div class="d-flex align-items-center">
                 <IndicatorPill :indicator="indicators.find(ind => ind.name === column.indicator).class ?? 'gray'" />
                 <span class="column-title">{{ column.title }}</span>
             </div>
@@ -26,9 +25,7 @@
             </div>
         </div>
 
-        <div class="add-card" v-if="showNew !== column.id"
-            style="border: 1px solid var(--kanban-new-card-bg);color: inherit;background-color: white;"
-            @click="showNew = column.id">
+        <div class="add-card" v-if="showNew !== column.id" @click="showNew = column.id">
             <div class="ellipsis"> + Add {{ config.ref_doctype }} </div>
         </div>
         <div class="kanban-card new-card-area" v-if="showNew === column.id">
@@ -77,8 +74,9 @@ function newDoc(field) {
     newCard.value = '';
 }
 
-function getColumnStyle(color) {
-    return `background-color: var(--${color}-100); color: var(--${color}-800)`
+function getColumnStyle(columnIndicator) {
+    const color = indicators.find(indicator => indicator.name === columnIndicator).class
+    return `background-color: var(--kanban-column-${color}); color: var(--text-on-${color});`
 }
 
 function setIndicator(indicator, columnIndex, board_name) {

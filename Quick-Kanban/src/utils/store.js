@@ -81,7 +81,6 @@ const store = createStore({
                 const highlighted_field = board.custom_highlighted_field
                 const highlight_table = board.custom_highlight_table
                 let fields = [];
-                console.log(board);
                 if (board.fields) {
                     try {
                         fields = JSON.parse(board.fields);
@@ -108,7 +107,7 @@ const store = createStore({
             }
         },
         async updateOrder({ commit, state }, { fromColumn, toColumn, fromIndex, toIndex, card }) {
-            console.log(fromColumn, toColumn, fromIndex, toIndex, card.title);
+            // console.log(fromColumn, toColumn, fromIndex, toIndex, card.title);
             // commit('MOVE_CARD', { fromColumn, toColumn, fromIndex, toIndex, card })
             try {
                 await frappe.call({
@@ -119,12 +118,12 @@ const store = createStore({
                         fieldname: state.config.field_name,
                         value: state.columns[toColumn].title,
                     },
-                    callback: function (r) {
-                        console.log('Dropped', card.title, 'to', r.message[state.config.field_name]);
-                    }
+                    // callback: function (r) {
+                    //     console.log('Dropped', card.title, 'to', r.message[state.config.field_name]);
+                    // }
                 });
             } catch (error) {
-                commit('MOVE_CARD', { fromColumn: toColumn, toColumn: fromColumn, fromIndex: toIndex, toIndex: fromIndex, card })
+                // commit('MOVE_CARD', { fromColumn: toColumn, toColumn: fromColumn, fromIndex: toIndex, toIndex: fromIndex, card })
                 console.error(error);
             }
         },

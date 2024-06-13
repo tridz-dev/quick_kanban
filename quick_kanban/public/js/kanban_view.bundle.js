@@ -5,13 +5,10 @@ let kanban_conf = frappe.call({
     method: "quick_kanban.get_beta _users.get_kanban_config",
     callback: function (r) {
         if (!r.exc && r.message) {
-            console.log("Kanban Beta Enabled:", r.message.kanban_beta);
-            console.log("Kanban Beta Users:", r.message.kanban_beta_users);
             kanban_conf = r.message
         }
     }
 });
-
 
 frappe.views.KanbanView = class KanbanView extends frappe.views.KanbanView {
 
@@ -38,7 +35,7 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.KanbanView {
             const script = document.createElement('script');
             script.src = '/assets/quick_kanban/js/quick_kanban.js';
             document.head.appendChild(script);
-            this.$result.html(`<div id="kanbanapp">App</div>`);
+            this.$result.html(`<div id="kanbanapp"></div>`);
         } else {
             if (window.refreshKanbanBoard) {
                 let args = this.get_call_args();

@@ -58,7 +58,7 @@ function getHighlight(field) {
                 { color = highlight.color }
             }
         }
-        style += `background-color:  var(--${color}-200); color: var(--${color}-700);`
+        style += `background-color:  var(--${color}-200); color: var(--${color}-800);`
         return style
     }
 }

@@ -10,7 +10,7 @@
     "build": "vite build && yarn copy-js",
     "preview": "vite preview",
     "watch": "./node_modules/.bin/chokidar './dist/assets/index*.js' './src/**/*' -c 'yarn build'",
-    "copy-js": "cp ./dist/assets/index*.js ../quick_kanban/public/js/quick_kanban.js && cp ./dist/assets/index*.css ../quick_kanban/public/css/quick_kanban.css"
+    "copy-js": "cp ./dist/assets/index*.js ../quick_kanban/public/js/quick_kanban.js && cp ./dist/assets/index*.css ../quick_kanban/public/css/quick_kanban.bundle.css"
   },
   "dependencies": {
     "vue": "^3.4.21",

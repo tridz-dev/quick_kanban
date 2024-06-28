@@ -10,8 +10,8 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = "/assets/quick_kanban/css/quick_kanban.css"
-app_include_js = "/assets/quick_kanban/js/kanban_view.bundle.js"
+app_include_css = "quick_kanban.bundle.css"
+app_include_js = "kanban_view.bundle.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/quick_kanban/css/quick_kanban.css"

@@ -14,7 +14,7 @@
             </span>
         </div>
 
-        <div class="kanban-card-meta d-flex align-items-start justify-content-between">
+        <div class="kanban-card-meta">
             <span :style="(getHighlight(card[config.highlighted_field]))">
                 {{ config.fields.includes(config.highlighted_field) ? card[config.highlighted_field] : '' }}
             </span>

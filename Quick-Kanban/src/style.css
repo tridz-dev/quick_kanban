@@ -87,7 +87,7 @@
 #kanbanapp .kanban-card {
   display: flex;
   position: relative;
-  font-size: x-small;
+  font-size: var(--text-md);
   gap: 2px;
   flex-direction: column;
   padding: 8px 12px 8px 12px;
@@ -101,8 +101,14 @@
   overflow-x: clip;
 }
 
+#kanbanapp .kanban-card-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
 #kanbanapp .card-title {
-  font-size: small;
   font-weight: 600;
   text-align: start;
   margin-bottom: 7px;

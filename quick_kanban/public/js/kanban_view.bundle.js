@@ -17,6 +17,12 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.KanbanView {
             this.renderOld()
             return
         }
+        if (kanban_conf.kanban_fix_users) {
+            if (kanban_conf.kanban_fix_users.includes(frappe.session.user)) {
+                this.renderFix()
+                return
+            }
+        }
         if (kanban_conf.kanban_beta_users) {
             if (kanban_conf.kanban_beta_users.includes(frappe.session.user)) {
                 this.renderBeta()
@@ -30,6 +36,20 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.KanbanView {
         }
     }
 
+    renderFix() {
+        if (!window.refreshKanbanBoard) {
+            const script = document.createElement('script');
+            script.src = '/assets/quick_kanban/js/quick_kanban_fix.js';
+            document.head.appendChild(script);
+            this.$result.html(`<div id="kanbanapp"></div>`);
+        } else {
+            if (window.refreshKanbanBoard) {
+                let args = this.get_args();
+                window.refreshKanbanBoard(args);
+            }
+        }
+    }
+    
     renderBeta() {
         if (!window.refreshKanbanBoard) {
             const script = document.createElement('script');

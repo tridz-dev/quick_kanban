@@ -6,7 +6,7 @@
                 <span class="column-title">{{ column.column_name }}</span>
             </div>
 
-            <div class="column-options dropdown pull-right show">
+            <div class="column-options dropdown pull-right show d-flex align-items-center" style="gap: 5px;">
                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" draggable="false">
                     <svg class="icon icon-sm">
                         <use href="#icon-dot-horizontal"></use>
@@ -22,12 +22,10 @@
                         </div>
                     </li>
                 </ul>
+                <div class="addcard" v-if="showNew !== column.name" @click="showNew = column.name"> + </div>
             </div>
         </div>
 
-        <div class="add-card" v-if="showNew !== column.name" @click="showNew = column.name">
-            <div class="ellipsis"> + Add {{ config.ref_doctype }} </div>
-        </div>
         <div class="kanban-card new-card-area" v-if="showNew === column.name">
             <textarea name="title" v-model="newCard" @blur="(showNew = false)"
                 @keyup.enter="newDoc(column.title)"></textarea>
@@ -35,8 +33,18 @@
 
         <draggable v-model="column.cards" group="cards" @end="drop" item-key="name" :animation="100" :id="columnIndex"
             class="kanban-cards">
-            <template #item="{ element }">
-                <KanbanCard :card="element" :config="config" :columnIndex="columnIndex" />
+            <template #header>
+                <div class="loadbtn" v-if="startIndex > 0" @click="loadPrevious">Load Previous</div>
+            </template>
+
+            <template #item="{ element, index }">
+                <KanbanCard v-if="index >= startIndex && index < endIndex" :card="element" :config="config"
+                    :columnIndex="columnIndex" />
+            </template>
+
+            <template #footer>
+                <div class="loadbtn" v-if="endIndex < (column.cards ? column.cards.length : 0)" @click="loadNext">Load
+                    Next</div>
             </template>
         </draggable>
     </div>
@@ -44,7 +52,7 @@
 
 <script setup>
 
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, computed } from 'vue';
 import draggable from 'vuedraggable';
 import { indicators } from '../../utils/colors';
 import KanbanCard from './KanbanCard.vue';
@@ -54,7 +62,11 @@ import { useStore } from 'vuex';
 const store = useStore();
 
 const props = defineProps({
-    column: Object,
+    column: {
+        type: Object,
+        required: true,
+        default: () => ({ cards: [] })
+    },
     config: Object,
     columnIndex: Number
 });
@@ -62,6 +74,12 @@ const emits = defineEmits(['drop']);
 
 const newCard = ref()
 const showNew = ref()
+const startIndex = ref(0)
+const cardsPerPage = 30
+
+const endIndex = computed(() => {
+    return Math.min(startIndex.value + cardsPerPage, props.column.cards?.length || 0);
+});
 
 function drop(evt) {
     emits('drop', evt)
@@ -81,6 +99,18 @@ function getColumnStyle(columnIndicator) {
 
 function setIndicator(indicator, columnIndex, board_name) {
     store.dispatch('setIndicator', { indicator, columnIndex, board_name });
+}
+
+function loadPrevious() {
+    if (startIndex.value > 0) {
+        startIndex.value = Math.max(0, startIndex.value - cardsPerPage);
+    }
+}
+
+function loadNext() {
+    if (startIndex.value + cardsPerPage < (props.column.cards?.length || 0)) {
+        startIndex.value += cardsPerPage;
+    }
 }
 
 </script>

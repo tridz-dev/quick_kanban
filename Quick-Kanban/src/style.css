@@ -69,7 +69,6 @@
   font-size: medium;
   font-weight: 600;
   text-align: start;
-  padding-right: 10px;
 }
 
 #kanbanapp .indicator-pill {
@@ -114,9 +113,17 @@
   margin-bottom: 7px;
 }
 
-#kanbanapp .add-card {
-  border: 1px solid var(--kanban-card-bg);
+#kanbanapp .addcard {
   color: inherit;
-  background-color: var(--card-bg);
-  height: 31px;
+  font-size: xx-large;
+  font-weight: 200;
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+}
+
+#kanbanapp .loadbtn{
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }

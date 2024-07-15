@@ -38,7 +38,7 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.KanbanView {
             this.$result.html(`<div id="kanbanapp"></div>`);
         } else {
             if (window.refreshKanbanBoard) {
-                let args = this.get_call_args();
+                let args = this.get_args();
                 window.refreshKanbanBoard(args);
             }
         }

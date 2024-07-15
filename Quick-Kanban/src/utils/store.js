@@ -3,11 +3,34 @@ import { createStore } from 'vuex';
 const store = createStore({
     state: {
         columns: [],
-        config: [],
+        config: {
+            board_name: '',
+            ref_doctype: '',
+            field_name: '',
+            title_field: '',
+            fields: [],
+            highlighted_field: '',
+            highlight_table: '',
+        },
     },
     mutations: {
         SET_COLUMNS(state, columns) {
-            state.columns = columns;
+            if (state.columns.length === 0) {
+                state.columns = columns;
+            } else {
+                columns.forEach((newColumn, index) => {
+                    if (state.columns[index]) {
+                        state.columns[index] = newColumn.cards
+                            ? newColumn
+                            : Object.assign(state.columns[index], ...Object.keys(newColumn).filter(key => key !== 'cards').map(key => ({ [key]: newColumn[key] })));
+                    } else {
+                        state.columns.push(newColumn);
+                    }
+                });
+            }
+            state.columns = state.columns.filter(oldColumn =>
+                columns.some(newColumn => newColumn.name === oldColumn.name)
+            );
         },
         MOVE_CARD(state, { fromColumn, toColumn, fromIndex, toIndex, card }) {
             state.columns[fromColumn].cards.splice(fromIndex, 1);
@@ -20,19 +43,13 @@ const store = createStore({
         UPDATE_COLUMN_INDICATOR(state, { columnIndex, indicator }) {
             state.columns[columnIndex].indicator = indicator;
         },
-        SET_KANBAN_CONFIG(state, { board_name, ref_doctype, field_name, title_field, fields, highlighted_field, highlight_table }) {
-            state.config.board_name = board_name;
-            state.config.ref_doctype = ref_doctype;
-            state.config.field_name = field_name;
-            state.config.title_field = title_field;
-            state.config.fields = fields;
-            state.config.highlighted_field = highlighted_field;
-            state.config.highlight_table = highlight_table;
+        SET_KANBAN_CONFIG(state, config) {
+            state.config = config;
         },
     },
     actions: {
         async fetchKanban({ commit, state }, { args }) {
-            if (args === 0) {
+            if (args === undefined) {
                 args = window.cur_list.get_args();
             }
             try {
@@ -53,7 +70,7 @@ const store = createStore({
                     columns.forEach((column) => {
                         column.cards = [];
                         board.values.forEach((card) => {
-                            if (card[fieldIndex] === column.title) {
+                            if (card[fieldIndex] === column.column_name) {
                                 const transformedCard = transformCard(board.keys, card, userInfoLookup);
                                 column.cards.push(transformedCard);
                             }
@@ -76,6 +93,8 @@ const store = createStore({
                 });
 
                 const board = response.message;
+                commit('SET_COLUMNS', board.columns);
+
                 const ref_doctype = board.reference_doctype;
                 const field_name = board.field_name;
                 const highlighted_field = board.custom_highlighted_field
@@ -91,17 +110,10 @@ const store = createStore({
                     fields = ['name', 'title'];
                 }
                 const meta = frappe.get_meta(ref_doctype);
+                
+                const config = { board_name, ref_doctype, field_name, title_field: meta.title_field, fields, highlighted_field, highlight_table }
+                commit('SET_KANBAN_CONFIG', config);
 
-                commit('SET_KANBAN_CONFIG', { board_name, ref_doctype, field_name, title_field: meta.title_field, fields, highlighted_field, highlight_table });
-
-                const columnsData = board.columns.map(column => ({
-                    id: column.name,
-                    title: column.column_name,
-                    indicator: column.indicator,
-                    cards: [],
-                }));
-
-                commit('SET_COLUMNS', columnsData);
             } catch (error) {
                 console.error('Error fetching columns:', error);
             }
@@ -116,7 +128,7 @@ const store = createStore({
                         doctype: state.config.ref_doctype,
                         name: card.name,
                         fieldname: state.config.field_name,
-                        value: state.columns[toColumn].title,
+                        value: state.columns[toColumn].column_name,
                     },
                     // callback: function (r) {
                     //     console.log('Dropped', card.title, 'to', r.message[state.config.field_name]);
@@ -133,7 +145,7 @@ const store = createStore({
                     method: 'frappe.desk.doctype.kanban_board.kanban_board.set_indicator',
                     args: {
                         board_name: board_name,
-                        column_name: state.columns[columnIndex].title,
+                        column_name: state.columns[columnIndex].column_name,
                         indicator: indicator,
                     },
                     callback: function () {

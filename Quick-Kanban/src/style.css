@@ -105,7 +105,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-top: 12px;
+  margin: 12px 0 5px;
 }
 
 #kanbanapp .card-title {

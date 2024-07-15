@@ -17,17 +17,17 @@ const board_name = frappe.get_route()[3]
 
 onMounted(() => {
   window.refreshKanbanBoard = refreshKanbanBoard;
-  store.dispatch('fetchColumns', { board_name })
-    .then(() => {
-      return store.dispatch('fetchKanban', { args: 0 });
-    })
-    .catch(error => console.error('Error during Kanban setup:', error));
+  refreshKanbanBoard()
 });
 
 console.log($);
 
 const refreshKanbanBoard = (args) => {
-  store.dispatch('fetchKanban', { args: args.args });
+  store.dispatch('fetchColumns', { board_name })
+    .then(() => {
+      return  store.dispatch('fetchKanban', {args});
+    })
+    .catch(error => console.error('Error during Kanban setup:', error));
 }
 
 function drop(evt) {

@@ -1,14 +1,14 @@
 <template>
-    <div class="kanban-column" :key="column.id" :style="getColumnStyle(column.indicator)">
+    <div class="kanban-column" :key="column.name" :style="getColumnStyle(column.indicator)">
         <div class="kanban-column-header">
             <div class="d-flex align-items-center">
                 <IndicatorPill :indicator="indicators.find(ind => ind.name === column.indicator).class ?? 'gray'" />
-                <span class="column-title">{{ column.title }}</span>
+                <span class="column-title">{{ column.column_name }}</span>
             </div>
 
             <div class="column-options dropdown pull-right show">
-                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" draggable="false"> <svg
-                        class="icon icon-sm">
+                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" draggable="false">
+                    <svg class="icon icon-sm">
                         <use href="#icon-dot-horizontal"></use>
                     </svg>
                 </a>
@@ -25,10 +25,10 @@
             </div>
         </div>
 
-        <div class="add-card" v-if="showNew !== column.id" @click="showNew = column.id">
+        <div class="add-card" v-if="showNew !== column.name" @click="showNew = column.name">
             <div class="ellipsis"> + Add {{ config.ref_doctype }} </div>
         </div>
-        <div class="kanban-card new-card-area" v-if="showNew === column.id">
+        <div class="kanban-card new-card-area" v-if="showNew === column.name">
             <textarea name="title" v-model="newCard" @blur="(showNew = false)"
                 @keyup.enter="newDoc(column.title)"></textarea>
         </div>

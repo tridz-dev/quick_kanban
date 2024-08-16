@@ -623,10 +623,10 @@ set-blocking@^2.0.0:
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
 
-sortablejs@1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.14.0.tgz#6d2e17ccbdb25f464734df621d4f35d4ab35b3d8"
-  integrity sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==
+sortable-dnd@latest:
+  version "0.6.15"
+  resolved "https://registry.yarnpkg.com/sortable-dnd/-/sortable-dnd-0.6.15.tgz#29bfbcabf3b3c5ca4d0300fdd23ebd1fb7129fb7"
+  integrity sha512-5Nrvdz6iFX5G7YT2V/aVtP+Miq/Tvlx9nNts2FW11MNuxIXh2oyebxdpzQZEo1qmNGvb0yygROXbU9cjQI1RgA==
 
 source-map-js@^1.2.0:
   version "1.2.0"
@@ -667,6 +667,13 @@ vite@^5.2.0:
   optionalDependencies:
     fsevents "~2.3.3"
 
+vue-virtual-draglist@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/vue-virtual-draglist/-/vue-virtual-draglist-3.3.2.tgz#25659156970e03505b09149048b5cd685dcb34af"
+  integrity sha512-CUpTvaT5F2Kb/qqQQVK2X//VgbgOMt8X1fmDdQa6XPoJ/ZPW9LmGVt5lEVr/MnXaTD6qN8gXIyuRKno33/pPbQ==
+  dependencies:
+    sortable-dnd latest
+
 vue@^3.4.21:
   version "3.4.27"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.4.27.tgz#40b7d929d3e53f427f7f5945386234d2854cc2a1"
@@ -677,13 +684,6 @@ vue@^3.4.21:
     "@vue/runtime-dom" "3.4.27"
     "@vue/server-renderer" "3.4.27"
     "@vue/shared" "3.4.27"
-
-vuedraggable@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/vuedraggable/-/vuedraggable-4.1.0.tgz#edece68adb8a4d9e06accff9dfc9040e66852270"
-  integrity sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww==
-  dependencies:
-    sortablejs "1.14.0"
 
 vuex@^4.0.2:
   version "4.1.0"

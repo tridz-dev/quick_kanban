@@ -1,5 +1,5 @@
 {
-  "name": "kanbanplus",
+  "name": "quick_kanban",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,11 +10,11 @@
     "build": "vite build && yarn copy-js",
     "preview": "vite preview",
     "watch": "./node_modules/.bin/chokidar './dist/assets/index*.js' './src/**/*' -c 'yarn build'",
-    "copy-js": "cp ./dist/assets/index*.js ../quick_kanban/public/js/quick_kanban.js && cp ./dist/assets/index*.css ../quick_kanban/public/css/quick_kanban.bundle.css"
+    "copy-js": "cp ./dist/assets/index*.js ../quick_kanban/public/js/quick_kanban.bundle.js && cp ./dist/assets/index*.css ../quick_kanban/public/css/quick_kanban.bundle.css"
   },
   "dependencies": {
     "vue": "^3.4.21",
-    "vuedraggable": "^4.1.0",
+    "vue-virtual-draglist": "^3.3.2",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

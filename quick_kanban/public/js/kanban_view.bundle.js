@@ -33,7 +33,7 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.KanbanView {
     renderBeta() {
         if (!window.refreshKanbanBoard) {
             const script = document.createElement('script');
-            script.src = '/assets/quick_kanban/js/quick_kanban.js';
+            script.src = '/assets/quick_kanban/js/quick_kanban.bundle.js';
             document.head.appendChild(script);
             this.$result.html(`<div id="kanbanapp"></div>`);
         } else {

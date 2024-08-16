@@ -7,10 +7,11 @@
   --kanban-column-yellow: #733f1280;
   --kanban-column-purple: #40186380;
   --kanban-column-pink: #570f3e80;
-  --kanban-column-green:#173b2c80;
+  --kanban-column-green: #173b2c80;
   --kanban-column-orange: #6b271180;
   --kanban-column-cyan: #16475980;
 }
+
 [data-theme=light] {
   --kanban-column-gray: var(--gray-200);
   --kanban-column-red: var(--red-200);
@@ -32,7 +33,7 @@
   position: relative;
   display: flex;
   justify-content: flex-start;
-  gap: 16px;
+  gap: 8px;
   overflow-x: auto;
   scrollbar-width: thin;
   height: 80vh;
@@ -46,6 +47,7 @@
   width: 250px;
   max-height: calc(100vh - var(--navbar-height) - var(--page-bottom-margin)) !important;
   border-radius: 12px;
+  min-height: 70vh;
 }
 
 #kanbanapp .kanban-column-header {
@@ -75,14 +77,6 @@
   margin-right: 6px
 }
 
-#kanbanapp .kanban-cards {
-  display: flex;
-  flex-direction: column;
-  max-height: 100% !important;
-  gap: 8px;
-  overflow-x: hidden;
-}
-
 #kanbanapp .kanban-card {
   display: flex;
   position: relative;
@@ -90,6 +84,7 @@
   gap: 2px;
   flex-direction: column;
   padding: 8px 12px 8px 12px;
+  margin-bottom: 8px;
   background: var(--card-bg);
   color: var(--text-muted);
   border: 1px solid var(--border-color);
@@ -97,7 +92,24 @@
   opacity: 1;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   cursor: grab;
+  user-select: none;
   overflow-x: clip;
+}
+
+#kanbanapp .chosen-card {
+  filter: contrast(0.9);
+}
+
+#kanbanapp .ghost-card {
+  filter: contrast(1);
+}
+
+#kanbanapp .chosen-card .drag {
+  opacity: 0;
+}
+
+#kanbanapp .ghost-card .drag {
+  opacity: 1;
 }
 
 #kanbanapp .kanban-card-meta {
@@ -122,7 +134,7 @@
   height: 20px;
 }
 
-#kanbanapp .loadbtn{
+#kanbanapp .loadbtn {
   display: flex;
   justify-content: center;
   cursor: pointer;

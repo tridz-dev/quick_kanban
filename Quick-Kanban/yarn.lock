@@ -623,6 +623,11 @@ set-blocking@^2.0.0:
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
 
+sortable-dnd@latest:
+  version "0.6.15"
+  resolved "https://registry.yarnpkg.com/sortable-dnd/-/sortable-dnd-0.6.15.tgz#29bfbcabf3b3c5ca4d0300fdd23ebd1fb7129fb7"
+  integrity sha512-5Nrvdz6iFX5G7YT2V/aVtP+Miq/Tvlx9nNts2FW11MNuxIXh2oyebxdpzQZEo1qmNGvb0yygROXbU9cjQI1RgA==
+
 sortablejs@1.14.0:
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.14.0.tgz#6d2e17ccbdb25f464734df621d4f35d4ab35b3d8"
@@ -666,6 +671,13 @@ vite@^5.2.0:
     rollup "^4.13.0"
   optionalDependencies:
     fsevents "~2.3.3"
+
+vue-virtual-draglist@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/vue-virtual-draglist/-/vue-virtual-draglist-3.3.2.tgz#25659156970e03505b09149048b5cd685dcb34af"
+  integrity sha512-CUpTvaT5F2Kb/qqQQVK2X//VgbgOMt8X1fmDdQa6XPoJ/ZPW9LmGVt5lEVr/MnXaTD6qN8gXIyuRKno33/pPbQ==
+  dependencies:
+    sortable-dnd latest
 
 vue@^3.4.21:
   version "3.4.27"

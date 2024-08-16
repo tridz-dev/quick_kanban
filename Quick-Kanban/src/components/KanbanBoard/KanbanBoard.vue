@@ -1,6 +1,7 @@
 <template>
   <div class="kanban">
-        <KanbanColumn v-for="(column, columnIndex) in columns" :column="column" :columnIndex="columnIndex" :config="config" @drop="drop" />
+    <KanbanColumn v-for="(column, columnIndex) in columns" :column="column" :columnIndex="columnIndex" :config="config"
+      @drop="drop" />
   </div>
 </template>
 
@@ -25,19 +26,23 @@ console.log($);
 const refreshKanbanBoard = (args) => {
   store.dispatch('fetchColumns', { board_name })
     .then(() => {
-      return  store.dispatch('fetchKanban', {args});
+      return store.dispatch('fetchKanban', { args });
     })
     .catch(error => console.error('Error during Kanban setup:', error));
 }
 
 function drop(evt) {
-  store.dispatch('updateOrder', {
-    fromColumn: evt.from.id,
-    toColumn: evt.to.id,
-    fromIndex: evt.oldIndex,
-    toIndex: evt.newIndex,
-    card: columns.value[evt.to.id].cards[evt.newIndex]
-  });
+  if (evt.newIndex === -1) {
+    console.log('Dropped from index', evt.oldIndex);
+  }
+  if (evt.oldIndex === -1)
+    store.dispatch('updateOrder', {
+      fromColumn: evt.from.id,
+      toColumn: evt.to.id,
+      fromIndex: -1,
+      toIndex: evt.newIndex,
+      card: columns.value[evt.to.id].cards[evt.newIndex]
+    });
 }
 
 </script>

@@ -1,25 +1,25 @@
 <template>
     <div class="kanban-card">
-        <div class="kanban-title-area pb-3">
+        <div class="kanban-title-area pb-3 drag">
             <a :href="getUrl()" draggable="false">
-                <span class="card-title ellipsis" :title="card[config.title_field]">
+                <span class="card-title ellipsis drag" :title="card[config.title_field]">
                     {{ card[config.title_field] }}
                 </span>
             </a>
         </div>
 
-        <div v-for="field in config.fields">
-            <span v-if="field !== card[config.title_field] && field !== config.highlighted_field">
+        <div v-for="field in config.fields" class="drag">
+            <span v-if="field !== card[config.title_field] && field !== config.highlighted_field" class="drag">
                 {{ field === 'creation' ? card[field]?.split('.')[0] : card[field] }}
             </span>
         </div>
 
-        <div class="kanban-card-meta">
-            <span :style="(getHighlight(card[config.highlighted_field]))">
+        <div class="kanban-card-meta drag">
+            <span :style="(getHighlight(card[config.highlighted_field]))" class="drag">
                 {{ config.fields.includes(config.highlighted_field) ? card[config.highlighted_field] : '' }}
             </span>
 
-            <div class="kanban-assignments d-flex float-right">
+            <div class="kanban-assignments d-flex float-right drag">
                 <div class="avatar-group float-right overlap">
                     <Assignments :assignments="card._assign" />
 

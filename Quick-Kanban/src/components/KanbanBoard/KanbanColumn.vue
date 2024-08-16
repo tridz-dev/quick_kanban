@@ -31,33 +31,23 @@
                 @keyup.enter="newDoc(column.title)"></textarea>
         </div>
 
-        <draggable v-model="column.cards" group="cards" @end="drop" item-key="name" :animation="100" :id="columnIndex"
-            class="kanban-cards">
-            <template #header>
-                <div class="loadbtn" v-if="startIndex > 0" @click="loadPrevious">Load Previous</div>
+        <VirtualList v-model="column.cards" @drop="drop" :dataKey="'name'" :id="columnIndex"
+            style="scrollbar-width: none;" :handle="'.drag'" :keeps="cardsLimit" group="kanban" chosenClass="chosen-card" ghostClass="ghost-card">
+            <template v-slot:item="{ record, index, dataKey }">
+                <KanbanCard :card="record" :config="config" :columnIndex="columnIndex" />
             </template>
-
-            <template #item="{ element, index }">
-                <KanbanCard v-if="index >= startIndex && index < endIndex" :card="element" :config="config"
-                    :columnIndex="columnIndex" />
-            </template>
-
-            <template #footer>
-                <div class="loadbtn" v-if="endIndex < (column.cards ? column.cards.length : 0)" @click="loadNext">Load
-                    Next</div>
-            </template>
-        </draggable>
+        </VirtualList>
     </div>
 </template>
 
 <script setup>
 
-import { defineProps, ref, computed } from 'vue';
-import draggable from 'vuedraggable';
+import { defineProps, ref } from 'vue';
+import { useStore } from 'vuex';
+import VirtualList from 'vue-virtual-draglist';
 import { indicators } from '../../utils/colors';
 import KanbanCard from './KanbanCard.vue';
 import IndicatorPill from '../IndicatorPill.vue';
-import { useStore } from 'vuex';
 
 const store = useStore();
 
@@ -74,15 +64,10 @@ const emits = defineEmits(['drop']);
 
 const newCard = ref()
 const showNew = ref()
-const startIndex = ref(0)
-const cardsPerPage = 30
-
-const endIndex = computed(() => {
-    return Math.min(startIndex.value + cardsPerPage, props.column.cards?.length || 0);
-});
+const cardsLimit = 30
 
 function drop(evt) {
-    emits('drop', evt)
+    emits('drop', evt.event)
 }
 
 function newDoc(field) {
@@ -99,18 +84,6 @@ function getColumnStyle(columnIndicator) {
 
 function setIndicator(indicator, columnIndex, board_name) {
     store.dispatch('setIndicator', { indicator, columnIndex, board_name });
-}
-
-function loadPrevious() {
-    if (startIndex.value > 0) {
-        startIndex.value = Math.max(0, startIndex.value - cardsPerPage);
-    }
-}
-
-function loadNext() {
-    if (startIndex.value + cardsPerPage < (props.column.cards?.length || 0)) {
-        startIndex.value += cardsPerPage;
-    }
 }
 
 </script>

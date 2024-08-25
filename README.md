@@ -28,10 +28,34 @@ Once you have the app, install it on your desired site using the command below. 
 bench install-app --site [sitename] quick_kanban
 ```
 
+### Step 3: Modify Site Config
+
+After installation, To enable the new Kanban board, add the `kanban_beta` attribute to the `site_config.json` in your `sites/[sitename]` directory.
+
+```json
+ "kanban_beta": 1
+```
+
+To enable the new Kanban board for specific users, add the usernames of desired users to the `kanban_beta_users` list in `site_config.json`.<br> For example:
+
+```json
+ "kanban_beta_users": [
+     "Username1",
+     "Username2"
+ ]
+```
+
 ## Usage
 
-TBA
+Create a Kanban Board for any doctype using the desired field as a reference, and you're all set!
 
+### Highlighted Field
+
+You can choose a field to be highlighted inside the Kanban card. To enable this feature, select a field as the `Highlighted Field` for your Kanban board.
+
+Additionally, you can assign a color for each value of that field in the highlight table of your Kanban Board. Simply type the expected value in the Tag column and select a corresponding color for it.<br><br>
+For example: <br><br>
+![kanban](https://github.com/user-attachments/assets/b25bac25-189c-4e79-a0ee-5e1ba0cc1fa0)
 
 ## License
 

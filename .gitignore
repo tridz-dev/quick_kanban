@@ -6,3 +6,4 @@ tags
 node_modules
 __pycache__
 quick_kanban/public/dist
+Quick-Kanban/dist

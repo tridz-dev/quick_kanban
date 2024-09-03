@@ -32,7 +32,8 @@
         </div>
 
         <VirtualList v-model="column.cards" @drop="drop" :dataKey="'name'" :id="columnIndex"
-            style="scrollbar-width: none;" :handle="'.drag'" :keeps="cardsLimit" group="kanban" chosenClass="chosen-card" ghostClass="ghost-card">
+            style="height: 100%;scrollbar-width: none;" :handle="'.drag'" :keeps="cardsLimit" group="kanban"
+            chosenClass="chosen-card" ghostClass="ghost-card">
             <template v-slot:item="{ record, index, dataKey }">
                 <KanbanCard :card="record" :config="config" :columnIndex="columnIndex" />
             </template>

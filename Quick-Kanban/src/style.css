@@ -1,5 +1,5 @@
 /* Kanban Board */
-[data-theme=dark] {
+[data-theme="dark"] {
   --kanban-column-gray: var(--gray-800);
   --kanban-column-red: #6b151580;
   --kanban-column-blue: #00488080;
@@ -12,7 +12,7 @@
   --kanban-column-cyan: #16475980;
 }
 
-[data-theme=light] {
+[data-theme="light"] {
   --kanban-column-gray: var(--gray-200);
   --kanban-column-red: var(--red-200);
   --kanban-column-blue: var(--blue-200);
@@ -27,6 +27,10 @@
 
 #kanbanapp {
   height: 80vh;
+}
+
+#kanbanapp .clickdrag-active {
+  cursor: grabbing;
 }
 
 #kanbanapp .kanban {
@@ -45,7 +49,9 @@
   flex-direction: column;
   gap: 8px;
   width: 250px;
-  max-height: calc(100vh - var(--navbar-height) - var(--page-bottom-margin)) !important;
+  max-height: calc(
+    100vh - var(--navbar-height) - var(--page-bottom-margin)
+  ) !important;
   border-radius: 12px;
   min-height: 70vh;
 }
@@ -73,8 +79,14 @@
   text-align: start;
 }
 
+#kanbanapp .header-item {
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 #kanbanapp .indicator-pill {
-  margin-right: 6px
+  margin-right: 6px;
 }
 
 #kanbanapp .kanban-card {
@@ -131,7 +143,10 @@
   font-weight: 200;
   display: inline-flex;
   align-items: center;
-  height: 20px;
+}
+
+#kanbanapp .header-item:hover {
+  background-color: #5b5f611c;
 }
 
 #kanbanapp .loadbtn {

@@ -47,7 +47,7 @@
             </div>
           </li>
         </ul>
-        <div class="addcard header-item" @click="newDoc(column.column_name)">
+        <div class="header-item" @click="newDoc(column.column_name)">
           <svg class="icon icon-sm" style="" aria-hidden="true">
             <use class="" href="#icon-add"></use>
           </svg>
@@ -75,25 +75,25 @@
         />
       </template>
 
-      <!-- <template #footer>
-        <div
-          @click="newDoc(column.column_name)"
-          class="header-item"
-          style="
-            display: flex;
-            align-items: center;
-            justify-content: start;
-            gap: 2px;
-          "
-        >
-          <div>
-            <svg class="icon icon-sm" style="scale: 0.9" aria-hidden="true">
+      <template #footer>
+        <div class="addcard">
+          <button
+            @click="newDoc(column.column_name)"
+            class="btn btn-default btn-sm"
+            :data-label="'Add ' + config.ref_doctype"
+          >
+            <svg class="icon icon-xs" style="" aria-hidden="true">
               <use class="" href="#icon-add"></use>
             </svg>
-          </div>
-          <span style="font-weight: 600">Add {{ config.doctype }}</span>
+            <span class="hidden-xs">
+              <span>
+                <span class="alt-underline"> A</span>dd
+                {{ config.ref_doctype }}
+              </span>
+            </span>
+          </button>
         </div>
-      </template> -->
+      </template>
     </VirtualList>
   </div>
 </template>
@@ -122,7 +122,7 @@ const props = defineProps({
 const emits = defineEmits(["drop"]);
 
 function drop(evt) {
-  emits("drop", evt.event);
+  emits("drop", evt);
 }
 
 function newDoc(field) {

@@ -49,6 +49,7 @@
   flex-direction: column;
   gap: 8px;
   width: 250px;
+  max-width: 350px;
   max-height: calc(
     100vh - var(--navbar-height) - var(--page-bottom-margin)
   ) !important;
@@ -77,12 +78,6 @@
   font-size: medium;
   font-weight: 600;
   text-align: start;
-}
-
-#kanbanapp .header-item {
-  padding: 4px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 #kanbanapp .indicator-pill {
@@ -138,11 +133,19 @@
 }
 
 #kanbanapp .addcard {
-  color: inherit;
-  font-size: xx-large;
-  font-weight: 200;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+#kanbanapp .header-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 #kanbanapp .header-item:hover {

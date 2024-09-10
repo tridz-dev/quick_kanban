@@ -29,9 +29,8 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  unbindClickDrag(); 
+  unbindClickDrag();
 });
-console.log($);
 
 const refreshKanbanBoard = (args) => {
   store
@@ -42,18 +41,17 @@ const refreshKanbanBoard = (args) => {
     .catch((error) => console.error("Error during Kanban setup:", error));
 };
 
-function drop(evt) {
-  console.log(evt);
+function drop(event) {
+  const evt = event.event;
   if (evt.newIndex === -1) {
     console.log("Dropped from index", evt.oldIndex);
   }
   if (evt.oldIndex === -1) {
-    console.log(evt.newIndex);
-    console.log(columns.value[evt.to.id].cards[evt.newIndex]);
-
     const card = columns.value[evt.to.id].cards.find(
-      (item) => item.name === evt.target.dataset.key
+      (item) => item.name === event.key
     );
+    console.log(card.name, ":", card[config.value.title_field]);
+
     store.dispatch("updateOrder", {
       fromColumn: evt.from.id,
       toColumn: evt.to.id,

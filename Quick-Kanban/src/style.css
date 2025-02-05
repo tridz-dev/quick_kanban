@@ -139,6 +139,10 @@
   margin-bottom: 4px;
 }
 
+#kanbanapp .addcard button {
+  background-color: var(--card-bg);
+}
+
 #kanbanapp .header-item {
   display: flex;
   align-items: center;

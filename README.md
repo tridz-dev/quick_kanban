@@ -30,7 +30,13 @@ bench install-app --site [sitename] quick_kanban
 
 ### Step 3: Modify Site Config
 
-After installation, To enable the new Kanban board, add the `kanban_beta` attribute to the `site_config.json` in your `sites/[sitename]` directory.
+After installation, you can enable the new Kanban board using the following bench command. Replace `[sitename]` with the name of your site:
+
+```bash
+bench set-config kanban_beta 1
+```
+
+Alternatively, to enable the new Kanban board, add the `kanban_beta` attribute to the `site_config.json` in your `sites/[sitename]` directory.
 
 ```json
  "kanban_beta": 1

@@ -79,13 +79,13 @@
         <div class="addcard">
           <button
             @click="newDoc(column.column_name)"
-            class="btn btn-default btn-sm"
+            class="btn btn-default btn-sm w-100"
             :data-label="'Add ' + config.ref_doctype"
           >
             <svg class="icon icon-xs" style="" aria-hidden="true">
               <use class="" href="#icon-add"></use>
             </svg>
-            <span class="hidden-xs">
+            <span>
               <span>
                 <span class="alt-underline"> A</span>dd
                 {{ config.ref_doctype }}

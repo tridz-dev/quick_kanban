@@ -17,7 +17,7 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.KanbanView {
             this.renderOld()
             return
         }
-        if (kanban_conf.kanban_beta_users) {
+        if (kanban_conf.kanban_beta_users?.length) {
             if (kanban_conf.kanban_beta_users.includes(frappe.session.user)) {
                 this.renderBeta()
             }
